@@ -11,7 +11,7 @@ class ContactCell: UICollectionViewCell {
     
     static let reuseID = "ContactCell"
 
-    private lazy var nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "Имя Фамилия"
         nameLabel.translatesAutoresizingMaskIntoConstraints = false

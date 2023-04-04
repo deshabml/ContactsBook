@@ -9,7 +9,7 @@ import UIKit
 
 class ContactsView: UIView {
 
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                   heightDimension: .absolute(48))
@@ -55,7 +55,7 @@ extension ContactsView {
     func setViews() {
         backgroundColor = .white
         collectionView.backgroundColor = .clear
-//        collectionView.register(ContactCell.self, forCellWithReuseIdentifier: ContactCell.reuseID)
+        collectionView.register(ContactCell.self, forCellWithReuseIdentifier: ContactCell.reuseID)
     }
 
     func setConstraints() {
