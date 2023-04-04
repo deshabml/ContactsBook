@@ -13,6 +13,8 @@
 		DDBA413029DB3113008E0431 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDBA412F29DB3113008E0431 /* Assets.xcassets */; };
 		DDBA413329DB3113008E0431 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDBA413129DB3113008E0431 /* LaunchScreen.storyboard */; };
 		DDBA413B29DB3169008E0431 /* ContacsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBA413A29DB3169008E0431 /* ContacsView.swift */; };
+		DDBA414429DCC78D008E0431 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBA414329DCC78D008E0431 /* Contact.swift */; };
+		DDBA414629DCC7BA008E0431 /* ContactCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBA414529DCC7BA008E0431 /* ContactCategory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		DDBA413229DB3113008E0431 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DDBA413429DB3113008E0431 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DDBA413A29DB3169008E0431 /* ContacsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContacsView.swift; sourceTree = "<group>"; };
+		DDBA414329DCC78D008E0431 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		DDBA414529DCC7BA008E0431 /* ContactCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCategory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				DDBA413C29DCC23D008E0431 /* Application */,
+				DDBA414229DCC767008E0431 /* Model */,
 				DDBA414129DCC51A008E0431 /* View */,
 				DDBA414029DCC510008E0431 /* Controller */,
 				DDBA413F29DCC4AF008E0431 /* Supporting files */,
@@ -113,6 +118,15 @@
 				DDBA413A29DB3169008E0431 /* ContacsView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		DDBA414229DCC767008E0431 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DDBA414329DCC78D008E0431 /* Contact.swift */,
+				DDBA414529DCC7BA008E0431 /* ContactCategory.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,7 +201,9 @@
 			files = (
 				DDBA412B29DB3111008E0431 /* ContactsController.swift in Sources */,
 				DDBA412729DB3111008E0431 /* AppDelegate.swift in Sources */,
+				DDBA414429DCC78D008E0431 /* Contact.swift in Sources */,
 				DDBA413B29DB3169008E0431 /* ContacsView.swift in Sources */,
+				DDBA414629DCC7BA008E0431 /* ContactCategory.swift in Sources */,
 				DDBA412929DB3111008E0431 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
