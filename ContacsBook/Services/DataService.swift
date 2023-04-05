@@ -50,8 +50,9 @@ class DataService {
     }
 
     func deleteContact(contact: Contact) {
-        var contacts = getContacts()
-        let deletedIndex = contacts.firstIndex { cont in
+        let contactsIn = getContacts()
+        var contacts = userDefaults.array(forKey: contactsKey) ?? []
+        let deletedIndex = contactsIn.firstIndex { cont in
             contact == cont
         }
         guard let deletedIndex else { return }

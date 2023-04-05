@@ -9,7 +9,7 @@ import UIKit
 
 class ContactsController: UIViewController {
 
-    private lazy var mainView: UIView = {
+    private lazy var mainView: ContactsView = {
         let mainView = ContactsView()
         mainView.collectionView.dataSource = self
         mainView.collectionView.delegate = self
@@ -46,8 +46,10 @@ extension ContactsController: UICollectionViewDelegate, UICollectionViewDataSour
 extension ContactsController {
 
     func presentEditContacts() {
+//        let ecc = EditContactsController()
+//        present(ecc, animated: true)
         let ecc = EditContactsController()
-        present(ecc, animated: true)
+        navigationController?.pushViewController(ecc, animated: true)
     }
 
     func setNavBar() {
