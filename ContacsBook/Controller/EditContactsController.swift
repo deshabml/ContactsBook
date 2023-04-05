@@ -13,6 +13,10 @@ class EditContactsController: UIViewController {
 
     private lazy var genderPickerData: Bool = true
 
+    private var contactEdit: Contact!
+
+    private lazy var isEdit: Bool = false
+
     private lazy var categoryData: [String] = [ContactCategory.classmates.rawValue, ContactCategory.coworkers.rawValue, ContactCategory.family.rawValue, ContactCategory.friends.rawValue]
 
 
@@ -22,7 +26,6 @@ class EditContactsController: UIViewController {
         super.viewDidLoad()
         navigationBarSetting()
         setView()
-        mainView.agePicker.selectRow(30, inComponent: 0, animated: true)
     }
 
 }
@@ -69,7 +72,7 @@ extension EditContactsController {
 
     private func navigationBarSetting() {
 //        if let _ = habit {
-            title = "Править"
+            title = "Контакт"
 //        } else {
 //            title = "Cоздать"
 //        }
@@ -77,9 +80,15 @@ extension EditContactsController {
         novigationBarColor.titleTextAttributes = [.foregroundColor: UIColor.black]
         novigationBarColor.backgroundColor = .systemGray5
         navigationItem.scrollEdgeAppearance = novigationBarColor
-        let buttenSave = UIBarButtonItem(title: "Cохранить", style: .done, target: self, action: #selector(buttonAction))
+        if isEdit {
+            let buttenSave = UIBarButtonItem(title: "Cохранить", style: .done, target: self, action: #selector(editButtonAction))
+            navigationItem.rightBarButtonItem = buttenSave
+        } else {
+            let buttenSave = UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(buttonAction))
+            navigationItem.rightBarButtonItem = buttenSave
+        }
         let buttenBack = UIBarButtonItem(title: "Отменить", style: .done, target: self, action: #selector(backButtonAction))
-        navigationItem.rightBarButtonItem = buttenSave
+//        navigationItem.rightBarButtonItem = buttenSave
         navigationItem.leftBarButtonItem = buttenBack
         navigationItem.rightBarButtonItem?.tintColor = .systemBlue
         navigationItem.leftBarButtonItem?.tintColor = .systemBlue
@@ -92,6 +101,7 @@ extension EditContactsController {
         mainView.genderPicker.delegate = self
         mainView.categoryPicker.dataSource = self
         mainView.categoryPicker.delegate = self
+        setupEdit()
 //        mainView.setView(doneButtonAction: {
 //            self.exitButtonAction()
 //        }, cancelButtonAction: {
@@ -104,22 +114,86 @@ extension EditContactsController {
     @objc func buttonAction() {
         let data = mainView.getData()
         guard let nameText = data.nameTextField, let emailText = data.emailTextField, let phone = Int(data.phoneTextField ?? "") else { return }
+        let age = agePickerData[mainView.agePicker.selectedRow(inComponent: 0)]
+        print(age)
+        let category: ContactCategory
+        switch categoryData[mainView.categoryPicker.selectedRow(inComponent: 0)] {
+            case ContactCategory.classmates.rawValue:
+                category = .classmates
+            case ContactCategory.coworkers.rawValue:
+                category = .coworkers
+            case ContactCategory.family.rawValue:
+                category = .family
+            case ContactCategory.friends.rawValue:
+                category = .friends
+            default:
+                category = .friends
+        }
         let newContact: Contact = Contact(name: nameText,
                                           email: emailText,
-                                          age: 34,
+                                          age: age,
                                           phone: phone,
-                                          gender: true,
-                                          category: .family)
+                                          gender: genderPickerData,
+                                          category: category)
         DataService.shared.saveContact(newContact) {
-            print("ap op")
         }
         print(mainView.agePicker.selectedRow(inComponent: 0))
         navigationController?.popViewController(animated: true)
     }
 
-    @objc func backButtonAction() {
-       DataService.shared.deleteContact(contact: Contact(name: "Вован", email: "Vladi@mt.ru", age: 34, phone: 88888888888, gender: true, category: .family))
+    @objc func editButtonAction() {
+        let data = mainView.getData()
+        guard let nameText = data.nameTextField, let emailText = data.emailTextField, let phone = Int(data.phoneTextField ?? "") else { return }
+        let age = agePickerData[mainView.agePicker.selectedRow(inComponent: 0)]
+        print(age)
+        let category: ContactCategory
+        switch categoryData[mainView.categoryPicker.selectedRow(inComponent: 0)] {
+            case ContactCategory.classmates.rawValue:
+                category = .classmates
+            case ContactCategory.coworkers.rawValue:
+                category = .coworkers
+            case ContactCategory.family.rawValue:
+                category = .family
+            case ContactCategory.friends.rawValue:
+                category = .friends
+            default:
+                category = .friends
+        }
+        let newContact: Contact = Contact(name: nameText,
+                                          email: emailText,
+                                          age: age,
+                                          phone: phone,
+                                          gender: genderPickerData,
+                                          category: category)
+        DataService.shared.editContact(contactOld: contactEdit, contactNew: newContact)
+        print(mainView.agePicker.selectedRow(inComponent: 0))
         navigationController?.popViewController(animated: true)
+    }
+
+    @objc func backButtonAction() {
+//       DataService.shared.deleteContact(contact: Contact(name: "Вован", email: "Vladi@mt.ru", age: 34, phone: 88888888888, gender: true, category: .family))
+        navigationController?.popViewController(animated: true)
+    }
+
+    func setupEdit(contactEdit: Contact) {
+        self.contactEdit = contactEdit
+        isEdit = true
+    }
+
+    func setupEdit() {
+        mainView.agePicker.selectRow(30, inComponent: 0, animated: true)
+        if isEdit {
+            mainView.setupEdit(name: contactEdit.name,
+                               email: contactEdit.email,
+                               phone: "\(contactEdit.phone)")
+            mainView.agePicker.selectRow(contactEdit.age, inComponent: 0, animated: true)
+            mainView.genderPicker.selectRow(contactEdit.gender ? 0 : 1, inComponent: 0, animated: true)
+            let categoryIndex = categoryData.firstIndex { category in
+                category == contactEdit.category.rawValue
+            }
+            guard let categoryIndex else { return }
+            mainView.categoryPicker.selectRow(categoryIndex, inComponent: 0, animated: true)
+        }
     }
 
 //    func exitButtonAction() {

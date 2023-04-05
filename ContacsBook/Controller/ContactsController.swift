@@ -28,6 +28,12 @@ class ContactsController: UIViewController {
         getContacts()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getContacts()
+        mainView.collectionView.reloadData()
+    }
+
 }
 
 extension ContactsController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -39,6 +45,16 @@ extension ContactsController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContactCell.reuseID, for: indexPath) as! ContactCell
         cell.nameLabel.text = contacts[indexPath.item].name
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let ecc = EditContactsController()
+        ecc.setupEdit(contactEdit: contacts[indexPath.row])
+//        hdvc.habit = habitsStore.habits[indexPath.row]
+//        hdvc.index = indexPath.row
+        navigationController?.pushViewController(ecc, animated: true)
     }
     
 }

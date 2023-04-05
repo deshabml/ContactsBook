@@ -49,6 +49,17 @@ class DataService {
         return contacts
     }
 
+    func editContact(contactOld: Contact, contactNew: Contact) {
+        let contactsIn = getContacts()
+        var contacts = userDefaults.array(forKey: contactsKey) ?? []
+        let editIndex = contactsIn.firstIndex { cont in
+            contactOld == cont
+        }
+        guard let editIndex else { return }
+        contacts[editIndex] = contactNew.representation
+        userDefaults.set(contacts, forKey: contactsKey)
+    }
+
     func deleteContact(contact: Contact) {
         let contactsIn = getContacts()
         var contacts = userDefaults.array(forKey: contactsKey) ?? []

@@ -238,6 +238,12 @@ extension EditContactsView {
         (nameTextField.text, emailTextField.text, phoneTextField.text)
     }
 
+    func setupEdit(name: String, email: String, phone: String) {
+        nameTextField.text = name
+        emailTextField.text = email
+        phoneTextField.text = phone
+    }
+
 //    @objc func cancelAction() {
 //        cancelButtonAction()
 //    }
