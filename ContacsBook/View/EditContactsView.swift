@@ -9,38 +9,7 @@ import UIKit
 
 class EditContactsView: UIView {
 
-//    private var doneButtonAction: (() -> ())!
-//
-//    private var cancelButtonAction: (() -> ())!
-
-//    private lazy var doneButton: UILabel = {
-//        let doneButton = UILabel()
-//        doneButton.text = "Готово"
-//        doneButton.textColor = .systemBlue
-//        doneButton.isUserInteractionEnabled = true
-//        doneButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(doneAction)))
-//        doneButton.translatesAutoresizingMaskIntoConstraints = false
-//        return doneButton
-//    }()
-//
-//    private lazy var cancelButton: UILabel = {
-//        let cancelButton = UILabel()
-//        cancelButton.text = "Отменить"
-//        cancelButton.textColor = .systemBlue
-//        cancelButton.isUserInteractionEnabled = true
-//        cancelButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cancelAction)))
-//        cancelButton.translatesAutoresizingMaskIntoConstraints = false
-//        return cancelButton
-//    }()
-//
-//    private lazy var titleLabel: UILabel = {
-//        let titleLabel = UILabel()
-//        titleLabel.text = "Контакт"
-//        titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-//        titleLabel.textColor = .black
-//        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        return titleLabel
-//    }()
+    private var deleteActoins: (() -> ())!
 
     private lazy var nameTextField: UITextField = {
         let nameTextField = UITextField(frame: .zero)
@@ -126,6 +95,17 @@ class EditContactsView: UIView {
         return categoryText
     }()
 
+    lazy var deleteLabel: UILabel = {
+        let deleteLabel = UILabel()
+        deleteLabel.text = "Удалить контакт"
+        deleteLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        deleteLabel.textColor = .systemRed
+        deleteLabel.isUserInteractionEnabled = true
+        deleteLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(deleteLabelActoins)))
+        deleteLabel.translatesAutoresizingMaskIntoConstraints = false
+        return deleteLabel
+    }()
+
     init() {
         super.init(frame: CGRect())
         setViews()
@@ -146,22 +126,14 @@ extension EditContactsView {
 
     private func setConstraints() {
         addSubview(stack)
-//        addSubview(doneButton)
-//        addSubview(cancelButton)
-//        addSubview(titleLabel)
         addSubview(ageText)
         addSubview(agePicker)
         addSubview(genderText)
         addSubview(genderPicker)
         addSubview(categoryText)
         addSubview(categoryPicker)
+        addSubview(deleteLabel)
         NSLayoutConstraint.activate([
-//            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-//            titleLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
-//            doneButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-//            doneButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-//            cancelButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-//            cancelButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
             stack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50),
             stack.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
             stack.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
@@ -184,7 +156,9 @@ extension EditContactsView {
             categoryPicker.topAnchor.constraint(equalTo: agePicker.bottomAnchor, constant: 8),
             categoryPicker.leadingAnchor.constraint(equalTo: categoryText.trailingAnchor, constant: 4),
             categoryPicker.widthAnchor.constraint(equalToConstant: 240),
-            categoryPicker.heightAnchor.constraint(equalToConstant: 90)
+            categoryPicker.heightAnchor.constraint(equalToConstant: 90),
+            deleteLabel.topAnchor.constraint(equalTo: categoryPicker.bottomAnchor, constant: 50),
+            deleteLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
         ])
     }
 
@@ -213,11 +187,6 @@ extension EditContactsView: UITextFieldDelegate {
 
 extension EditContactsView {
 
-//    func setView (doneButtonAction: @escaping () -> (), cancelButtonAction: @escaping () -> ()) {
-//        self.doneButtonAction = doneButtonAction
-//        self.cancelButtonAction = cancelButtonAction
-//    }
-
     @objc func doneAction() {
         guard let nameText = nameTextField.text, let emailText = emailTextField.text, let phone = Int(phoneTextField.text ?? "") else { return }
         let newContact: Contact = Contact(name: nameText,
@@ -227,25 +196,22 @@ extension EditContactsView {
                                           gender: true,
                                           category: .family)
         DataService.shared.saveContact(newContact) {
-            print("ap op")
         }
-        print(agePicker.selectedRow(inComponent: 0))
-//        doneButtonAction()
+    }
+
+    @objc func deleteLabelActoins() {
+        deleteActoins()
     }
 
     func getData() ->(nameTextField: String?, emailTextField: String?, phoneTextField: String?) {
-//        let data: (nameTextField: String?, emailTextField: String?, phoneTextField: String?) =
         (nameTextField.text, emailTextField.text, phoneTextField.text)
     }
 
-    func setupEdit(name: String, email: String, phone: String) {
+    func setupEdit(name: String, email: String, phone: String, deleteActoins: @escaping () -> ()) {
         nameTextField.text = name
         emailTextField.text = email
         phoneTextField.text = phone
+        self.deleteActoins = deleteActoins
     }
-
-//    @objc func cancelAction() {
-//        cancelButtonAction()
-//    }
 
 }

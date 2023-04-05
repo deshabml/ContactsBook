@@ -52,8 +52,6 @@ extension ContactsController: UICollectionViewDelegate, UICollectionViewDataSour
         collectionView.deselectItem(at: indexPath, animated: true)
         let ecc = EditContactsController()
         ecc.setupEdit(contactEdit: contacts[indexPath.row])
-//        hdvc.habit = habitsStore.habits[indexPath.row]
-//        hdvc.index = indexPath.row
         navigationController?.pushViewController(ecc, animated: true)
     }
     
@@ -62,8 +60,6 @@ extension ContactsController: UICollectionViewDelegate, UICollectionViewDataSour
 extension ContactsController {
 
     func presentEditContacts() {
-//        let ecc = EditContactsController()
-//        present(ecc, animated: true)
         let ecc = EditContactsController()
         navigationController?.pushViewController(ecc, animated: true)
     }
