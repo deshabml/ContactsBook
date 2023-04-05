@@ -9,15 +9,21 @@ import UIKit
 
 class ContactsController: UIViewController {
 
-    let mainView = ContactsView()
+    private lazy var mainView: UIView = {
+        let mainView = ContactsView()
+        mainView.collectionView.dataSource = self
+        mainView.collectionView.delegate = self
+        mainView.setView {
+            self.presentEditContacts()
+        }
+        return mainView
+    }()
 
-    var contacts: [Contact] = []
+    private lazy var contacts: [Contact] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mainView
-        mainView.collectionView.dataSource = self
-        mainView.collectionView.delegate = self
         setNavBar()
         getContacts()
     }
@@ -34,9 +40,15 @@ extension ContactsController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.nameLabel.text = contacts[indexPath.item].name
         return cell
     }
+    
 }
 
 extension ContactsController {
+
+    func presentEditContacts() {
+        let ecc = EditContactsController()
+        present(ecc, animated: true)
+    }
 
     func setNavBar() {
         navigationItem.title = DataService.shared.userName ?? "Введите имя пользователя"
@@ -57,7 +69,6 @@ extension ContactsController {
         alert.addTextField { tf in
             tf.placeholder = "Ваше имя..."
         }
-
         let okAction = UIAlertAction(title: "Готово!", style: .default) { _ in
             guard let name = alert.textFields![0].text else { return }
             DataService.shared.saveUserName(name) {

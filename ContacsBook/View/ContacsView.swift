@@ -9,6 +9,8 @@ import UIKit
 
 class ContactsView: UIView {
 
+    private var presentEditContacts: (() -> ())!
+
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
@@ -25,9 +27,12 @@ class ContactsView: UIView {
     }()
 
     private lazy var newContactButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setTitle("Новый контакт", for: .normal)
-        return btn
+        let newContactButton = UIButton(type: .system)
+        newContactButton.setTitle("Новый контакт", for: .normal)
+        newContactButton.addTarget(self,
+                                   action: #selector(ContactButtonPressed),
+                                   for: .touchUpInside)
+        return newContactButton
     }()
 
     private lazy var stack: UIStackView = {
@@ -66,6 +71,18 @@ extension ContactsView {
             stack.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
             stack.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor)
         ])
+    }
+
+}
+
+extension ContactsView {
+
+    @objc func ContactButtonPressed() {
+        presentEditContacts()
+    }
+
+    func setView (presentEditContacts: @escaping () -> ()) {
+        self.presentEditContacts = presentEditContacts
     }
 
 }
