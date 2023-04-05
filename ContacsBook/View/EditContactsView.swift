@@ -102,6 +102,7 @@ class EditContactsView: UIView {
         deleteLabel.textColor = .systemRed
         deleteLabel.isUserInteractionEnabled = true
         deleteLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(deleteLabelActoins)))
+        deleteLabel.isHidden = true
         deleteLabel.translatesAutoresizingMaskIntoConstraints = false
         return deleteLabel
     }()
@@ -212,6 +213,7 @@ extension EditContactsView {
         emailTextField.text = email
         phoneTextField.text = phone
         self.deleteActoins = deleteActoins
+        deleteLabel.isHidden = false
     }
 
 }

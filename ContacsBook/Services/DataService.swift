@@ -15,7 +15,7 @@ class DataService {
 
     let contactsKey = "Contacts"
 
-    var firstTimeKey = "FirstTime"
+    let firstTimeKey = "FirstTime"
 
     let userNameKey = "UserName"
 
@@ -24,11 +24,20 @@ class DataService {
         return name
     }
 
+    var firstTime: Bool? {
+        let first = userDefaults.bool(forKey: firstTimeKey)
+        return first
+    }
+
     private init() { }
 
     func saveUserName(_ name: String, completion: () -> ()) {
         userDefaults.set(name, forKey: userNameKey)
         completion()
+    }
+
+    func firstTimeFalse(_ firstTime: Bool) {
+        userDefaults.set(firstTime, forKey: firstTimeKey)
     }
 
     func saveContact(_ contact: Contact, completion: () -> ()) {

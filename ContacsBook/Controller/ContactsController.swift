@@ -23,6 +23,7 @@ class ContactsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        WelcomeScreenPresent()
         view = mainView
         setNavBar()
         getContacts()
@@ -32,6 +33,7 @@ class ContactsController: UIViewController {
         super.viewWillAppear(animated)
         getContacts()
         mainView.collectionView.reloadData()
+        navigationController?.navigationBar.isHidden = false
     }
 
 }
@@ -71,6 +73,7 @@ extension ContactsController {
             style: .plain,
             target: self,
             action: #selector(showSetNameAlert))
+        navigationItem.leftBarButtonItem?.isHidden = true
     }
 
     func getContacts() {
@@ -92,6 +95,13 @@ extension ContactsController {
         }
         alert.addAction(okAction)
         self.present(alert, animated: true)
+    }
+
+    func WelcomeScreenPresent() {
+        if let first = DataService.shared.firstTime, !first {
+            let sc = WelcomeScreenController()
+            navigationController?.pushViewController(sc, animated: true)
+        }
     }
 
 }

@@ -113,18 +113,24 @@ extension EditContactsController {
             default:
                 category = .friends
         }
+        guard isMail(mail: emailText) else {
+            let alert = UIAlertController(title: "Внимание!", message: "Не корректный e-mail!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Попробывать сного", style: .cancel ))
+            present(alert, animated: true, completion: nil)
+            return
+        }
         let newContact: Contact = Contact(name: nameText,
                                           email: emailText,
                                           age: age,
                                           phone: phone,
                                           gender: genderPickerData,
                                           category: category)
+
         if isEdit {
             DataService.shared.editContact(contactOld: contactEdit, contactNew: newContact)
         } else {
             DataService.shared.saveContact(newContact){}
         }
-
         navigationController?.popViewController(animated: true)
     }
 
@@ -166,6 +172,12 @@ extension EditContactsController {
             self.navigationController?.popViewController(animated: true)
         })
         present(avc, animated: true)
+    }
+
+    private func isMail(mail: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: mail)
     }
 
 }

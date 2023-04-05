@@ -19,6 +19,7 @@
 		DDBA414B29DCCD17008E0431 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBA414A29DCCD17008E0431 /* ContactCell.swift */; };
 		DDBA414D29DD31CF008E0431 /* EditContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBA414C29DD31CF008E0431 /* EditContactsController.swift */; };
 		DDBA414F29DD69DA008E0431 /* EditContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBA414E29DD69DA008E0431 /* EditContactsView.swift */; };
+		DDBA415129DE221D008E0431 /* WelcomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBA415029DE221D008E0431 /* WelcomeScreenController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		DDBA414A29DCCD17008E0431 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		DDBA414C29DD31CF008E0431 /* EditContactsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactsController.swift; sourceTree = "<group>"; };
 		DDBA414E29DD69DA008E0431 /* EditContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactsView.swift; sourceTree = "<group>"; };
+		DDBA415029DE221D008E0431 /* WelcomeScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 		DDBA414029DCC510008E0431 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DDBA415029DE221D008E0431 /* WelcomeScreenController.swift */,
 				DDBA412A29DB3111008E0431 /* ContactsController.swift */,
 				DDBA414C29DD31CF008E0431 /* EditContactsController.swift */,
 			);
@@ -228,6 +231,7 @@
 				DDBA414429DCC78D008E0431 /* Contact.swift in Sources */,
 				DDBA413B29DB3169008E0431 /* ContacsView.swift in Sources */,
 				DDBA414629DCC7BA008E0431 /* ContactCategory.swift in Sources */,
+				DDBA415129DE221D008E0431 /* WelcomeScreenController.swift in Sources */,
 				DDBA412929DB3111008E0431 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
