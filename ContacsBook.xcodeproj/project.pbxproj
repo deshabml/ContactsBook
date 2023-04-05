@@ -18,6 +18,7 @@
 		DDBA414929DCC919008E0431 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBA414829DCC919008E0431 /* DataService.swift */; };
 		DDBA414B29DCCD17008E0431 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBA414A29DCCD17008E0431 /* ContactCell.swift */; };
 		DDBA414D29DD31CF008E0431 /* EditContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBA414C29DD31CF008E0431 /* EditContactsController.swift */; };
+		DDBA414F29DD69DA008E0431 /* EditContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBA414E29DD69DA008E0431 /* EditContactsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		DDBA414829DCC919008E0431 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		DDBA414A29DCCD17008E0431 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		DDBA414C29DD31CF008E0431 /* EditContactsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactsController.swift; sourceTree = "<group>"; };
+		DDBA414E29DD69DA008E0431 /* EditContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			children = (
 				DDBA413A29DB3169008E0431 /* ContacsView.swift */,
 				DDBA414A29DCCD17008E0431 /* ContactCell.swift */,
+				DDBA414E29DD69DA008E0431 /* EditContactsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				DDBA414D29DD31CF008E0431 /* EditContactsController.swift in Sources */,
 				DDBA414B29DCCD17008E0431 /* ContactCell.swift in Sources */,
 				DDBA412B29DB3111008E0431 /* ContactsController.swift in Sources */,
+				DDBA414F29DD69DA008E0431 /* EditContactsView.swift in Sources */,
 				DDBA414929DCC919008E0431 /* DataService.swift in Sources */,
 				DDBA412729DB3111008E0431 /* AppDelegate.swift in Sources */,
 				DDBA414429DCC78D008E0431 /* Contact.swift in Sources */,
